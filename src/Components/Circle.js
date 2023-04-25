@@ -5,7 +5,7 @@ const Circle = ({clickHandler, indexNumber, active}) => {
     return (
         <div className='p-10'>
             <div className="avatar" onClick={()=>clickHandler(indexNumber)}>
-  <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+  <div className="transition w-24 duration-75 ease-in-out rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 active:w-64">
     
     {indexNumber === active && <img src={image} alt=''/>}
   </div>
