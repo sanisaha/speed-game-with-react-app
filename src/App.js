@@ -41,7 +41,7 @@ enableCircles = () =>{
 startGame = () => {
   if(document.getElementById('select_level').value !== 'level'){
     document.getElementById('select_level').classList.add('hidden');
-  if(this.state.pace >= 1000) {
+  if(this.state.pace >= 1500) {
     this.state.gameSound.play();
 }
   if(this.state.rounds >= 4){
