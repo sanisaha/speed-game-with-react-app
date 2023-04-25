@@ -5,10 +5,11 @@ import clickSound from './assets/sounds/clickSound.wav';
 import endSound from './assets/sounds/endSound.wav';
 import gameSound from './assets/sounds/gameSound.wav';
 import Modal from './Components/Modal';
+import image from './assets/istockphoto-1132395683-612x612.jpg'
 
 class App extends Component {
 state = {
-  circles: ['first', 'second', 'third', 'fourth'],
+  circles: '',
   score: 0,
   active: 0,
   timer: '',
@@ -38,7 +39,8 @@ enableCircles = () =>{
 }
 
 startGame = () => {
-  document.getElementById('select_level').classList.add('hidden');
+  if(document.getElementById('select_level').value !== 'level'){
+    document.getElementById('select_level').classList.add('hidden');
   if(this.state.pace >= 1000) {
     this.state.gameSound.play();
 }
@@ -52,6 +54,10 @@ startGame = () => {
   this.setState({timer: setTimeout(this.startGame, this.state.pace)})
   this.setState({pace: this.state.pace - 10});
   this.setState({rounds: this.state.rounds + 1});
+  } else {
+    alert('please select game level');
+  }
+  
 }
 
 pickNew(active) {
@@ -63,10 +69,12 @@ pickNew(active) {
     this.setState({firstValue: 0});
     this.setState({secondValue: 5});
     this.setState({circles: ['first', 'second', 'third', 'fourth', 'five', 'six']});
-  } else {
+  } else if(document.getElementById('select_level').value === 'easy') {
     this.setState({firstValue: 0});
     this.setState({secondValue: 3});
     this.setState({circles: ['first', 'second', 'third', 'fourth']});
+  } else {
+    this.setState({circles: ''});
   }
   const nextRandom = this.getRndInt(this.state.firstValue, this.state.secondValue);
 if(nextRandom !== this.state.active){
@@ -76,7 +84,7 @@ if(nextRandom !== this.state.active){
 }}
 
 endGame = () => {
-  this.state.endSound.play();
+    this.state.endSound.play();
   clearTimeout(this.state.timer);
   document.getElementById('start-btn').classList.remove('hidden');
   document.getElementById('end-btn').classList.add('hidden');
@@ -89,16 +97,24 @@ endGame = () => {
   render() {
     return (
       <div className='font-mono relative bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 min-h-screen'>
-        <header className='p-5 text-center text-yellow-200 font-bold'>Welcome to <span className='transition duration-150 ease-out hover:ease-in'>speed</span> Game</header>
-        <p className='font-bold text-center text-yellow-200'>Score: {this.state.score}</p>
+        <header className='animate-wiggle p-5 text-center text-yellow-200 font-bold'>Welcome to speed Game</header>
+        <p className='font-bold text-center text-yellow-200 mb-3'>Score: {this.state.score}</p>
         <select id='select_level' defaultValue='level' className="select select-accent w-32 absolute top-2 right-2 bg-black text-green-500">
   <option disabled value='level'>level</option>
   <option value='easy'>Easy</option>
   <option value='medium'>Medium</option>
   <option value='difficult'>Difficult</option>
 </select>
-        <div id='circle-container' className='flex flex-wrap justify-evenly pointer-events-none'>
-        {this.state.circles.map((item, index) => item = <Circle
+{this.state.circles === '' && <div className='avatar animate-move'>
+<div className="w-32 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+    
+<img  src={image} alt=''></img>
+  </div>
+  
+  
+  </div>}
+        <div id='circle-container' className='flex flex-wrap justify-center pointer-events-none'>
+        {this.state.circles !== '' && this.state.circles.map((item, index) => item = <Circle
          key={index}
          active = {this.state.active}
          indexNumber = {index}
@@ -107,7 +123,7 @@ endGame = () => {
         )}
         </div>
         <div className='text-center'>
-        <button id='start-btn' onClick={this.startGame} className='btn btn-success'>Start Game</button>
+        <button id='start-btn' onClick={this.startGame} className='btn btn-success animate-bounce'>Start Game</button>
         <button id='end-btn' onClick={this.endGame} className='btn btn-warning hidden'>End Game</button>
         </div>
         <div>
