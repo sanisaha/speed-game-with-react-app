@@ -54,7 +54,19 @@ startGame = () => {
 }
 
 pickNew(active) {
-  console.log(document.getElementsByName('select_level').isConnected);
+  if(document.getElementById('select_level').value === 'medium'){
+    this.setState({firstValue: 0});
+    this.setState({secondValue: 4});
+    this.setState({circles: ['first', 'second', 'third', 'fourth', 'five']});
+  } else if (document.getElementById('select_level').value === 'difficult'){
+    this.setState({firstValue: 0});
+    this.setState({secondValue: 5});
+    this.setState({circles: ['first', 'second', 'third', 'fourth', 'five', 'six']});
+  } else {
+    this.setState({firstValue: 0});
+    this.setState({secondValue: 3});
+    this.setState({circles: ['first', 'second', 'third', 'fourth']});
+  }
   const nextRandom = this.getRndInt(this.state.firstValue, this.state.secondValue);
 if(nextRandom !== this.state.active){
   this.setState({active:nextRandom})
@@ -77,8 +89,8 @@ endGame = () => {
       <div className='relative bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 min-h-screen'>
         <header className='p-5 text-center text-white-600 font-bold'>Welcome to speed Game</header>
         <p className='font-bold text-center'>Score: {this.state.score}</p>
-        <select name='select_level' className="select select-accent w-32 absolute top-2 right-2 bg-black text-green-500">
-  <option disabled selected>level</option>
+        <select id='select_level' className="select select-accent w-32 absolute top-2 right-2 bg-black text-green-500">
+  <option disabled selected value='level'>level</option>
   <option value='easy'>Easy</option>
   <option value='medium'>Medium</option>
   <option value='difficult'>Difficult</option>
