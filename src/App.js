@@ -38,6 +38,7 @@ enableCircles = () =>{
 }
 
 startGame = () => {
+  document.getElementById('select_level').classList.add('hidden');
   if(this.state.pace >= 1000) {
     this.state.gameSound.play();
 }
@@ -82,15 +83,16 @@ endGame = () => {
   this.setState({pace: 1500});
   this.setState({rounds: 0});
   this.setState({modal: true});
+  document.getElementById('select_level').classList.remove('hidden');
 }
 
   render() {
     return (
-      <div className='relative bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 min-h-screen'>
-        <header className='p-5 text-center text-white-600 font-bold'>Welcome to speed Game</header>
-        <p className='font-bold text-center'>Score: {this.state.score}</p>
-        <select id='select_level' className="select select-accent w-32 absolute top-2 right-2 bg-black text-green-500">
-  <option disabled selected value='level'>level</option>
+      <div className='font-mono relative bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 min-h-screen'>
+        <header className='p-5 text-center text-yellow-200 font-bold'>Welcome to <span className='transition duration-150 ease-out hover:ease-in'>speed</span> Game</header>
+        <p className='font-bold text-center text-yellow-200'>Score: {this.state.score}</p>
+        <select id='select_level' defaultValue='level' className="select select-accent w-32 absolute top-2 right-2 bg-black text-green-500">
+  <option disabled value='level'>level</option>
   <option value='easy'>Easy</option>
   <option value='medium'>Medium</option>
   <option value='difficult'>Difficult</option>
