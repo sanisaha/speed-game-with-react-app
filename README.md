@@ -1,10 +1,25 @@
-# Getting Started with Create React App
+# Speed game with React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## game feature
 
-## Available Scripts
+=> circles are not clickable before game start
 
-In the project directory, you can run:
+=> press start button to start the game
 
-### `npm start`
+=> user can select the level of the game (easy, medium and difficult)
 
+=> If user click on the wrong circle / skip clicking for 3 seconds, the game will stop
+
+=> User can also stop the game anytime by pressing end game button
+
+=> Game speed will increase with game progress
+
+=> A modal will show up with score notification if game stop
+
+=> Has game sounds
+
+## game technology
+
+=> React js
+
+=> Tailwind css
